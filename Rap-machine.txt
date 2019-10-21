@@ -1,0 +1,80 @@
+Not good:
+Alex
+Anna
+Fiona
+Fred
+Joana
+Kanya
+Maged
+Mei-Jia
+Melina
+Monica
+Paulina
+Sin-ji
+Tessa
+Thomas
+Victoria
+Yelda
+Yuna
+Yuri
+
+Straight:
+- Alva
+- Amelie
++ Daniel
++ Milena
+- Moira
+- Samantha
++ Sara
+
+
+Swing:
+- Alice
+- Carmit
++ Diego
++ Ellen
++ Ioana
+- Jorge
++ Juan
+- Lekha
++ Luca
+- Mariska
++ Satu
++ Ting Ting
++ Xander
++ Zosia
++ Zuzana
+
+
+Wild:
+Kyoko
+Luciana
+
+
+Beatboxers:
+Clean - Daniel
+Cool - Diego
+Hard - Xander
+Wack - Sara
+Crazy - Satu
+
+Patterns:
+Simple - boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti 
+
+Funky - boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti 
+
+Complex - boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti 
+
+
+1) What's up gangsta. Welcome to Googles hiphop beat service. I am here to make your rhymes sound tight. First you have to choose a pattern. Do you want simple, funky, or complex?
+
+2) Fo sho my dude. Do you like it fast or more slow?
+
+3) Che ki di check. So do you want it high or low?
+
+4) Now it's time to choose a beatboxer. All of them are up for some dope ass hiphop. What style are you into? Clean, cool, hard, wack or crazy?
+
+5) That's cool. I'll just go get [Name of beatboxer] then. Wait a sec.
+
+6) Hi. This is [name of beatboxer]. Ready if you are.
+
