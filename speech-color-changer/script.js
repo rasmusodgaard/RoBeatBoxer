@@ -126,7 +126,7 @@ recognition.onresult = function(event) {
 
   //Background color is changed
   bg.style.backgroundColor = color;
-
+  speak(color, 1,1, "Ting-Ting");
   // confidence percentage for the result. Potentially multiply this number with Rate or Pitch
   // A way of letting the machine get agency
   console.log("Confidence: " + event.results[0][0].confidence);
