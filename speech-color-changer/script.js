@@ -55,6 +55,8 @@ var pitch = 1;
 var introText = "Whats up gangsta. Welcome to Googles hiphop beat service";
 //var introText = 'bum ti bum bum ti bum ti bum bum ti bum ti bum bum ti bum ti bum bum ti bum ti bum bum ti ';
 
+var progress = 0;
+
 // Function for retrieveing all available voices and their names
 // Don't meddle with this, just use it!
 function populateVoiceList() {
@@ -81,6 +83,7 @@ function speak(input, pitch, rate, voice) {
     var utterThis = new SpeechSynthesisUtterance(input);
     utterThis.onend = function(event) {
       console.log("SpeechSynthesisUtterance.onend");
+      recognition.start();
     };
     utterThis.onerror = function(event) {
       console.error("SpeechSynthesisUtterance.onerror");
@@ -98,11 +101,22 @@ function speak(input, pitch, rate, voice) {
   }
 }
 
+SpeechSynthesisUtterance.onend = function() { recognition.start() };
+
 // Start recognition when body is clicked, potentially another input?
 document.body.onclick = function() {
-  recognition.start();
+  // recognition.start();
   // speak(introText, 1, 1, "Ting-Ting");
+  TestConversation();
 };
+
+function TestConversation() {
+  if (synth.speaking) {
+    return;
+  }
+
+  speak(introText, 1, 1, "Fred");
+}
 
 // Event fired when a result is recieved back from the WebAPI
 recognition.onresult = function(event) {
@@ -126,7 +140,7 @@ recognition.onresult = function(event) {
 
   //Background color is changed
   bg.style.backgroundColor = color;
-  speak(color, 1,1, "Ting-Ting");
+  speak(color, 1, 1, "Ting-Ting");
   // confidence percentage for the result. Potentially multiply this number with Rate or Pitch
   // A way of letting the machine get agency
   console.log("Confidence: " + event.results[0][0].confidence);
