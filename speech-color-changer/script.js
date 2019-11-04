@@ -48,7 +48,7 @@ var bg = document.querySelector("html");
 var hints = document.querySelector(".hints");
 
 // Text displayed below headline. Potentially subtitles for what is being said by Fred
-hints.innerHTML = "Yoyo Gangsta";
+hints.innerHTML = "Click to begin!";
 
 // --------------------------- //
 //       Speech synthesis      //
@@ -66,9 +66,8 @@ var rate = 1;
 var pitch = 1;
 
 // Here all the text inputs from Fred should be saved in an array-like format
-// var introText =
-//   "What's up gangsta. I'm the voice assistant Rap Machine. I am here to make your rhymes sound tight on the dopest of beats. First you have to choose a pattern. Do you want simple, funky, or complex?";
-var introText = "hi";
+var introText =
+  "What's up gangsta. I'm the voice assistant Rap Machine. I am here to make your rhymes sound tight on the dopest of beats. First you have to choose a pattern. Do you want simple, funky, or complex?";
 var progress = 0;
 
 var pattern = ["simple", "complex", "funky"];
