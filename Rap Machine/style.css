@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
   margin: 0;
 }
 
@@ -11,24 +12,23 @@ body {
   overflow: auto;
 }
 
-h1, p {
+h1,
+p {
   font-family: fantasy;
   text-align: center;
   padding: 20px;
 }
 
 div {
-  height: 100px;
-  width: 20%;
+  height: 150px;
+  width: 50%;
   overflow: auto;
   position: absolute;
-  bottom: 17%;
+  bottom: 0%;
   right: 0;
   left: 0;
-  margin-left : auto;
-  margin-right : auto;
-
-  background-color: rgba(25,255,255,0.2);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 ul {
@@ -36,22 +36,24 @@ ul {
 }
 
 .hints span {
-  text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
+  margin-top: 10%;
 }
 
-.center
-{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
 }
 
-.cassette
-{
+.cassette {
   display: block;
   margin-left: 65%;
   margin-top: -10%;
   width: 28%;
 }
 
+.output {
+  display: hidden;
+}

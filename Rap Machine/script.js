@@ -44,7 +44,7 @@ var numberOfAlternatives = 5;
 recognition.maxAlternatives = numberOfAlternatives;
 
 var diagnostic = document.querySelector(".output");
-var bg = document.querySelector("html");
+// var bg = document.querySelector("html");
 var hints = document.querySelector(".hints");
 
 // Text displayed below headline. Potentially subtitles for what is being said by Fred
@@ -79,14 +79,16 @@ var tempospeak = "Fo sho my dude. Do you like it speedy or relaxed?";
 var hilo = ["hi", "low"];
 var hilospeak = "Che ki di check. So do you want it hi or lo?";
 
-var beatboxer = ["clean", "hard", "wack", "sloppy", "cool"];
-var beatboxerspeak = "Now it's time to choose a beatboxer. All of them are up for some dope ass hiphop. What style are you into? Clean, cool, hard, wack or sloppy?";
+var beatboxer = ["clean", "hard", "wack", "crazy", "cool"];
+var bbImg = ["clean.gif", "hard.gif", "wack.gif", "crazy.gif", "cool.gif"];
+
+var beatboxerspeak = "Now it's time to choose a beatboxer. All of them are up for some dope ass hiphop. What style are you into? Clean, cool, hard, wack or crazy?";
 var speaks = [introText, tempospeak, hilospeak, beatboxerspeak];
 var defaultspeak = "speak up bro";
 
 var pattern_data = ["boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti", "boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti", "boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti"];
 
-var tempo_data = [2, 1.5];
+var tempo_data = [2, 1];
 
 var hilo_data = [1.5, 0.5];
 
@@ -102,18 +104,21 @@ function populateVoiceList()
     {
         const aname = a.name.toUpperCase(),
             bname = b.name.toUpperCase();
+
         if (aname < bname)
-        
+        {
             return -1;
-        
+        }
+
         else if (aname == bname)
-        
+        {
             return 0;
-        
+        }
+
         else
-        
+        {
             return + 1;
-        
+        }
     });
 
     console.log("Number of voices: " + voices.length);
@@ -338,8 +343,6 @@ function FindBeatBoxer(input)
             progress++;
             break;
 
-        default:
-            break;
     }
     if (progress <= 3)
     {
@@ -347,6 +350,9 @@ function FindBeatBoxer(input)
     }
     else
     {
+        document.getElementById("cassette").src = bbImg[settings[3]];
+        document.getElementById("cassette").style.visibility = "visible";
+
         PlayBeat();
     }
 }
