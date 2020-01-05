@@ -8,7 +8,7 @@ html {
 
 body {
   height: inherit;
-  overflow: hidden;
+  overflow: auto;
 }
 
 h1, p {
@@ -19,12 +19,16 @@ h1, p {
 
 div {
   height: 100px;
+  width: 20%;
   overflow: auto;
   position: absolute;
-  bottom: 0px;
+  bottom: 17%;
   right: 0;
   left: 0;
-  background-color: rgba(255,255,255,0.2);
+  margin-left : auto;
+  margin-right : auto;
+
+  background-color: rgba(25,255,255,0.2);
 }
 
 ul {
@@ -41,5 +45,13 @@ ul {
     margin-left: auto;
     margin-right: auto;
     width: 70%;
+}
+
+.cassette
+{
+  display: block;
+  margin-left: 65%;
+  margin-top: -10%;
+  width: 28%;
 }
 
