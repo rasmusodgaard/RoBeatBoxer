@@ -20,7 +20,7 @@ p {
 }
 
 div {
-  height: 150px;
+  height: 400px;
   width: 50%;
   overflow: auto;
   position: absolute;
@@ -35,16 +35,17 @@ ul {
   margin: 0;
 }
 
-.hints span {
+.hints {
   text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
   margin-top: 10%;
+  /* background-color: #ac0303; */
 }
 
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
+  width: 50%;
 }
 
 .cassette {

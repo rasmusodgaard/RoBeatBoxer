@@ -21,25 +21,26 @@ var voices = [];
 var introText = 'Whats up gangsta. Welcome to Googles hiphop beat service. I am here to make your rhymes sound tight. First you have to choose a pattern. Do you want simple, funky, or complex?';
 //var introText = 'bum ti bum bum ti bum ti bum bum ti bum ti bum bum ti bum ti bum bum ti bum ti bum bum ti ';
 
+$('.dropdown-trigger').dropdown();
 
 // Function for retrieveing all available voices and their names
 // Don't meddle with this, just use it!
 function populateVoiceList() {
   voices = synth.getVoices().sort(function (a, b) {
-      const aname = a.name.toUpperCase(), bname = b.name.toUpperCase();
-      if ( aname < bname ) return -1;
-      else if ( aname == bname ) return 0;
-      else return +1;
+    const aname = a.name.toUpperCase(), bname = b.name.toUpperCase();
+    if (aname < bname) return -1;
+    else if (aname == bname) return 0;
+    else return +1;
   });
 
 
   var selectedIndex = voiceSelect.selectedIndex < 0 ? 0 : voiceSelect.selectedIndex;
   voiceSelect.innerHTML = '';
-  for(i = 0; i < voices.length ; i++) {
+  for (i = 0; i < voices.length; i++) {
     var option = document.createElement('option');
     option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
-    
-    if(voices[i].default) {
+
+    if (voices[i].default) {
       option.textContent += ' -- DEFAULT';
     }
 
@@ -56,22 +57,22 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
 }
 
 // Original speak function - Sets the wheels in motion
-function speak(){
-    if (synth.speaking) {
-        console.error('speechSynthesis.speaking');
-        return;
-    }
-    if (inputTxt.value !== '') {
+function speak() {
+  if (synth.speaking) {
+    console.error('speechSynthesis.speaking');
+    return;
+  }
+  if (inputTxt.value !== '') {
     var utterThis = new SpeechSynthesisUtterance(inputTxt.value);
     utterThis.onend = function (event) {
-        console.log('SpeechSynthesisUtterance.onend');
+      console.log('SpeechSynthesisUtterance.onend');
     }
     utterThis.onerror = function (event) {
-        console.error('SpeechSynthesisUtterance.onerror');
+      console.error('SpeechSynthesisUtterance.onerror');
     }
     var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
-    for(i = 0; i < voices.length ; i++) {
-      if(voices[i].name === selectedOption) {
+    for (i = 0; i < voices.length; i++) {
+      if (voices[i].name === selectedOption) {
         utterThis.voice = voices[i];
         break;
       }
@@ -83,20 +84,17 @@ function speak(){
 }
 
 // Speak function overload with string input parameter
-function speak(input)
-{
+function speak(input) {
   if (synth.speaking) {
     console.error('speechSynthesis.speaking');
     return;
   }
   if (input !== '') {
     var utterThis = new SpeechSynthesisUtterance(input);
-    utterThis.onend = function (event)
-    {
+    utterThis.onend = function (event) {
       console.log('SpeechSynthesisUtterance.onend');
     }
-    utterThis.onerror = function (event)
-    {
+    utterThis.onerror = function (event) {
       console.error('SpeechSynthesisUtterance.onerror');
     }
     var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
@@ -113,22 +111,22 @@ function speak(input)
 }
 
 // Event handler for when the form is submitted to the web API
-inputForm.onsubmit = function(event) {
+inputForm.onsubmit = function (event) {
   event.preventDefault();
   speak(introText);
 }
 
 // Event handler for when the pitch slider have been changed
-pitch.onchange = function() {
+pitch.onchange = function () {
   pitchValue.textContent = pitch.value;
 }
 
 // Event handler for when the rate slider have been changed
-rate.onchange = function() {
+rate.onchange = function () {
   rateValue.textContent = rate.value;
 }
 
 // Event handler for when the voice drop down have been changed
-voiceSelect.onchange = function(){
+voiceSelect.onchange = function () {
   speak();
 }
