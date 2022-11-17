@@ -19,8 +19,7 @@ p {
   padding: 20px;
 }
 
-div {
-  height: 400px;
+/* div {
   width: 50%;
   overflow: auto;
   position: absolute;
@@ -29,7 +28,7 @@ div {
   left: 0;
   margin-left: auto;
   margin-right: auto;
-}
+} */
 
 ul {
   margin: 0;
@@ -37,15 +36,14 @@ ul {
 
 .hints {
   text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
-  margin-top: 10%;
-  /* background-color: #ac0303; */
+  margin-top: 1%;
+  background-color: blueviolet;
 }
 
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
 }
 
 .cassette {
@@ -57,4 +55,35 @@ ul {
 
 .output {
   display: hidden;
+}
+
+#buttonDiv {
+  background-color: aqua;
+  margin-top: 1%;
+
+}
+
+#dropdownDiv {
+  margin-top: 1%;
+  background-color: aquamarine;
+}
+
+#startbutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  font-size: large;
+  font-family: fantasy;
+  padding: 20px;
+
+}
+
+#optionsSelect {
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  height: 50px;
+  font-size: large;
+  font-family: fantasy;
 }

@@ -6,12 +6,9 @@ var hints = document.querySelector(".hints");
 // Text displayed below headline. Potentially subtitles for what is being said by Fred
 hints.innerHTML = "Click to begin!";
 
-var myDiv = document.getElementById("myDiv");
-
+var dropdown = document.getElementById("optionsSelect");
+var startbutton = document.getElementById("startbutton");
 //Create and append select list
-var selectList = document.createElement("select");
-selectList.setAttribute("id", "mySelect");
-myDiv.appendChild(selectList);
 
 // --------------------------- //
 //       Speech synthesis      //
@@ -94,14 +91,22 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
 
 function ShowUserOptions(arrayOfChoices) {
     //Clear list
-    selectList.options.length = 0;
+    dropdown.options.length = 0;
+
+    var option = document.createElement("option");
+    option.setAttribute("value", "none");
+    option.selected = true;
+    option.disabled = true;
+    option.hidden = true;
+    option.text = "Select an Option";
+    dropdown.appendChild(option);
 
     //Create and append the options
     for (var i = 0; i < arrayOfChoices.length; i++) {
         var option = document.createElement("option");
         option.setAttribute("value", arrayOfChoices[i]);
         option.text = arrayOfChoices[i];
-        selectList.appendChild(option);
+        dropdown.appendChild(option);
     }
 }
 
@@ -126,6 +131,8 @@ function speak(input, pitch, rate, voice) {
             if (voices[i].name === voice) {
                 utterThis.voice = voices[i];
                 break;
+            } else {
+                console.error("Could not find beatboxer voice. Using default");
             }
         }
 
@@ -135,16 +142,11 @@ function speak(input, pitch, rate, voice) {
     }
 }
 
-// Start recognition when body is clicked, potentially another input?
-document.onclick = function () {
-    // recognition.start();
-    // speak(introText, 1, 1, "Ting-Ting");
-
+startbutton.onclick = function () {
     if (progress == 0) {
         StartConversation();
     }
 };
-// bool to only start once
 
 function StartConversation() {
     if (synth.speaking) {
@@ -153,6 +155,10 @@ function StartConversation() {
     speak(introText, 1, 1, "en_US");
 }
 
+function SetOption(dropdown) {
+    var selectedValue = dropdown.value;
+    CheckResult(selectedValue);
+}
 
 function CheckResult(input) {
     switch (progress) {
@@ -177,8 +183,7 @@ function CheckResult(input) {
 }
 
 function FindPattern(input) {
-    var processedResult = CheckAlternatives(input, pattern);
-    switch (processedResult) {
+    switch (input) {
         case pattern[0]: settings[0] = 0;
             progress++;
             break;
@@ -188,7 +193,6 @@ function FindPattern(input) {
         case pattern[2]: settings[0] = 2;
             progress++;
             break;
-
         default:
             break;
     }
@@ -196,8 +200,8 @@ function FindPattern(input) {
 }
 
 function FindTempo(input) {
-    var processedResult = CheckAlternatives(input, tempo);
-    switch (processedResult) {
+
+    switch (input) {
         case tempo[0]: settings[1] = 0;
             progress++;
             break;
@@ -212,8 +216,8 @@ function FindTempo(input) {
 }
 
 function FindHiLo(input) {
-    var processedResult = CheckAlternatives(input, hilo);
-    switch (processedResult) {
+
+    switch (input) {
         case hilo[0]: settings[2] = 0;
             progress++;
             break;
@@ -228,8 +232,8 @@ function FindHiLo(input) {
 }
 
 function FindBeatBoxer(input) {
-    var processedResult = CheckAlternatives(input, beatboxer);
-    switch (processedResult) {
+
+    switch (input) {
         case beatboxer[0]: settings[3] = 0;
             progress++;
             break;
