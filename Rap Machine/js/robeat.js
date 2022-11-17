@@ -4,7 +4,7 @@ var diagnostic = document.querySelector(".output");
 var hints = document.querySelector(".hints");
 
 // Text displayed below headline. Potentially subtitles for what is being said by Fred
-hints.innerHTML = "Click to begin!";
+hints.innerHTML = "";
 
 var dropdown = document.getElementById("optionsSelect");
 var startbutton = document.getElementById("startbutton");

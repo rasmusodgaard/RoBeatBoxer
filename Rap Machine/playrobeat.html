@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>RoBeat Boxer</title>
+
+  <link rel="stylesheet" href="css/robeatStyle.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+
+  <!-- Fontawesome -->
+  <script src="https://kit.fontawesome.com/fd54662810.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<body>
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper white">
+        <a href="index.html" class="brand-logo center">
+          <span class="logo black-text flow-text">Rasmus Odgaard</span>
+        </a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+          <i class="material-icons black-text">menu</i>
+        </a>
+
+        <ul class="right hide-on-med-and-down">
+          <li><a href="index.html" class="list-item">Portfolio</a></li>
+          <li><a href="about.html" class="list-item">About Me</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="index.html">Portfolio</a></li>
+    <li><a href="about.html">About Me</a></li>
+  </ul>
+
+
+  <div>
+
+    <IMG SRC="img/rap.gif" class="center">
+    <IMG SRC="img/clean.gif" class="cassette" id="cassette" style="visibility:hidden;">
+
+    <div id="buttonDiv">
+
+      <button id="startbutton" class="center" type="button">Click To Start</button>
+
+    </div>
+
+    <div id="dropdownDiv">
+      <select id="optionsSelect" class="center" onchange="SetOption(this)" style="visibility:hidden"></select>
+    </div>
+    <p class="hints"></p>
+    <p class="output" style="visibility: hidden;"> <em>...diagnostic messages</em></p>
+  </div>
+
+  <script src="js/robeat.js"></script>
+</body>
+
+</html>

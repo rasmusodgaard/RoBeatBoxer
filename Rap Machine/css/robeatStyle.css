@@ -19,16 +19,9 @@ p {
   padding: 20px;
 }
 
-/* div {
-  width: 50%;
-  overflow: auto;
-  position: absolute;
-  bottom: 0%;
-  right: 0;
-  left: 0;
-  margin-left: auto;
-  margin-right: auto;
-} */
+.list-item {
+  color: black;
+}
 
 ul {
   margin: 0;
