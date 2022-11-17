@@ -17,6 +17,9 @@ var startbutton = document.getElementById("startbutton");
 // controller interface for the speech synthesizer
 var synth = window.speechSynthesis;
 
+var progress = 0;
+var hasPlayedBeat = false;
+
 // all the different voices loaded from the API
 var voices = [];
 var voiceSelect = document.querySelector("select");
@@ -26,11 +29,8 @@ var rate = 1;
 var pitch = 1;
 
 // Here all the text inputs from Fred should be saved in an array-like format
-
-var introText = "yo!";
-// var introText = "What's up gangsta. I'm the voice assistant Rap Machine. I am here to make your rhymes sound tight on the dopest of beats. First you have to choose a pattern. Do you want simple, funky, or complex?";
-var progress = 0;
-
+var introText = "What's up gangsta. I'm the voice assistant Rap Machine. I am here to make your rhymes sound tight on the dopest of beats. First you have to choose a pattern. Do you want simple, funky, or complex?";
+var hostVoice = "de-DE";
 var pattern = ["simple", "complex", "funky"];
 
 var tempo = ["speedy", "relaxed"];
@@ -42,22 +42,27 @@ var hilospeak = "Che ki di check. So do you want it hi or lo?";
 var beatboxer = ["clean", "hard", "wack", "crazy", "cool"];
 var bbImg = ["img/clean.gif", "img/hard.gif", "img/wack.gif", "img/crazy.gif", "img/cool.gif"];
 
-var beatboxerspeak = "Now it's time to choose a beatboxer. All of them are up for some dope ass hiphop. What style are you into? Clean, cool, hard, wack or crazy?";
+var beatboxerspeak = "Now it's time to choose a beatboxer. All of them are up for some dope ass hiphop. What style are you into? Clean, hard, wack, crazy or cool?";
 var speaks = [introText, tempospeak, hilospeak, beatboxerspeak];
 var defaultspeak = "speak up bro";
 
-var pattern_data = ["boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti", "boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti", "boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti"];
+var pattern_data = [
+    "boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti boom ti clap ti",
+    "boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti boom boom clap ti boom ti clap ti",
+    "boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti boom ti clap ti boom boom clap ti boom ti clap clap boom ti clap ti"];
 
 var tempo_data = [2, 1];
 
 var hilo_data = [1.5, 0.5];
 
 // var beatboxer_data = ["Daniel", "Xander", "Sara", "Ting-Ting", "Diego"];
-var beatboxer_data = ["en_GB", "nl_NL", "da_DK", "zh_CN", "es_AR"];
+var beatboxer_data = ["en-GB", "nl-NL", "fr-FR", "zh-CN", "es-ES"];
 
 var settings = [-1, -1, -1, -1];
 
 var choices = [pattern, tempo, hilo, beatboxer];
+
+
 // Function for retrieveing all available voices and their names
 function populateVoiceList() {
     voices = synth.getVoices().sort(function (a, b) {
@@ -81,6 +86,7 @@ function populateVoiceList() {
     console.log("Number of voices: " + voices.length);
     voices.forEach(element => {
         console.log(element.name);
+        console.log(element.lang);
     });
 }
 
@@ -108,9 +114,18 @@ function ShowUserOptions(arrayOfChoices) {
         option.text = arrayOfChoices[i];
         dropdown.appendChild(option);
     }
+
+    dropdown.style.visibility = "visible";
 }
 
 function speak(input, pitch, rate, voice) {
+
+    console.log("Play function:");
+    console.log(input);
+    console.log(pitch);
+    console.log(rate);
+    console.log(voice);
+
     if (synth.speaking) {
         console.error("speechSynthesis.speaking");
         return;
@@ -127,23 +142,24 @@ function speak(input, pitch, rate, voice) {
         utterThis.onerror = function (event) {
             console.error("SpeechSynthesisUtterance.onerror");
         };
-        for (i = 0; i < voices.length; i++) {
-            if (voices[i].name === voice) {
-                utterThis.voice = voices[i];
-                break;
-            } else {
-                console.error("Could not find beatboxer voice. Using default");
+
+        voices.forEach(element => {
+            if (element.lang === voice) {
+                utterThis.voice = element;
             }
-        }
+
+        });
 
         utterThis.pitch = pitch;
         utterThis.rate = rate;
         synth.speak(utterThis);
+        dropdown.style.visibility = "hidden";
     }
 }
 
 startbutton.onclick = function () {
     if (progress == 0) {
+        startbutton.style.visibility = "hidden";
         StartConversation();
     }
 };
@@ -152,7 +168,7 @@ function StartConversation() {
     if (synth.speaking) {
         return;
     }
-    speak(introText, 1, 1, "en_US");
+    speak(introText, 1, 1, hostVoice);
 }
 
 function SetOption(dropdown) {
@@ -183,6 +199,8 @@ function CheckResult(input) {
 }
 
 function FindPattern(input) {
+    console.log(input);
+
     switch (input) {
         case pattern[0]: settings[0] = 0;
             progress++;
@@ -196,11 +214,11 @@ function FindPattern(input) {
         default:
             break;
     }
-    speak(speaks[progress], 1, 1, "Fred");
+    speak(speaks[progress], 1, 1, hostVoice);
 }
 
 function FindTempo(input) {
-
+    console.log(input);
     switch (input) {
         case tempo[0]: settings[1] = 0;
             progress++;
@@ -212,10 +230,11 @@ function FindTempo(input) {
         default:
             break;
     }
-    speak(speaks[progress], 1, 1, "Fred");
+    speak(speaks[progress], 1, 1, hostVoice);
 }
 
 function FindHiLo(input) {
+    console.log(input);
 
     switch (input) {
         case hilo[0]: settings[2] = 0;
@@ -228,40 +247,47 @@ function FindHiLo(input) {
         default:
             break;
     }
-    speak(speaks[progress], 1, 1, "Fred");
+    speak(speaks[progress], 1, 1, hostVoice);
 }
 
 function FindBeatBoxer(input) {
+    console.log(input);
 
     switch (input) {
-        case beatboxer[0]: settings[3] = 0;
+        case beatboxer[0]:
+            settings[3] = 0;
             progress++;
             break;
-        case beatboxer[1]: settings[3] = 1;
+        case beatboxer[1]:
+            settings[3] = 1;
             progress++;
             break;
-        case beatboxer[2]: settings[3] = 2;
+        case beatboxer[2]:
+            settings[3] = 2;
             progress++;
             break;
-        case beatboxer[3]: settings[3] = 3;
+        case beatboxer[3]:
+            settings[3] = 3;
             progress++;
             break;
-        case beatboxer[4]: settings[3] = 4;
+        case beatboxer[4]:
+            settings[3] = 4;
             progress++;
             break;
 
-    }
-    if (progress <= 3) {
-        speak(speaks[progress], 1, 1, "Fred");
-    }
-    else {
-        document.getElementById("cassette").src = bbImg[settings[3]];
-        document.getElementById("cassette").style.visibility = "visible";
+        default: {
+            console.log(input + " is not  valid beatboxer");
+        }
 
-        PlayBeat();
     }
+
+    document.getElementById("cassette").src = bbImg[settings[3]];
+    document.getElementById("cassette").style.visibility = "visible";
+
+    PlayBeat();
 }
 
 function PlayBeat() {
     speak(pattern_data[settings[0]], tempo_data[settings[1]], hilo_data[settings[2]], beatboxer_data[settings[3]]);
+
 }
