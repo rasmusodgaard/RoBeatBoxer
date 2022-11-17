@@ -83,11 +83,11 @@ function populateVoiceList() {
     });
 
     // Debug available voices
-    console.log("Number of voices: " + voices.length);
-    voices.forEach(element => {
-        console.log(element.name);
-        console.log(element.lang);
-    });
+    // console.log("Number of voices: " + voices.length);
+    // voices.forEach(element => {
+    //     console.log(element.name);
+    //     console.log(element.lang);
+    // });
 }
 
 populateVoiceList();
@@ -120,27 +120,23 @@ function ShowUserOptions(arrayOfChoices) {
 
 function speak(input, pitch, rate, voice) {
 
-    console.log("Play function:");
-    console.log(input);
-    console.log(pitch);
-    console.log(rate);
-    console.log(voice);
-
     if (synth.speaking) {
-        console.error("speechSynthesis.speaking");
+        // console.error("speechSynthesis.speaking");
         return;
     }
-
-    hints.innerHTML = speaks[progress];
 
     if (input !== "") {
         var utterThis = new SpeechSynthesisUtterance(input);
         utterThis.onend = function (event) {
             console.log("SpeechSynthesisUtterance.onend");
-            ShowUserOptions(choices[progress]);
+            if (hasPlayedBeat == true) {
+                window.location.reload();
+            } else {
+                ShowUserOptions(choices[progress]);
+            }
         };
         utterThis.onerror = function (event) {
-            console.error("SpeechSynthesisUtterance.onerror");
+            // console.error("SpeechSynthesisUtterance.onerror");
         };
 
         voices.forEach(element => {
@@ -150,6 +146,7 @@ function speak(input, pitch, rate, voice) {
 
         });
 
+        hints.innerHTML = speaks[progress];
         utterThis.pitch = pitch;
         utterThis.rate = rate;
         synth.speak(utterThis);
@@ -193,13 +190,11 @@ function CheckResult(input) {
             break;
 
         default:
-            // potentielt lav failsafe
             break;
     }
 }
 
 function FindPattern(input) {
-    console.log(input);
 
     switch (input) {
         case pattern[0]: settings[0] = 0;
@@ -218,7 +213,6 @@ function FindPattern(input) {
 }
 
 function FindTempo(input) {
-    console.log(input);
     switch (input) {
         case tempo[0]: settings[1] = 0;
             progress++;
@@ -234,8 +228,6 @@ function FindTempo(input) {
 }
 
 function FindHiLo(input) {
-    console.log(input);
-
     switch (input) {
         case hilo[0]: settings[2] = 0;
             progress++;
@@ -251,8 +243,6 @@ function FindHiLo(input) {
 }
 
 function FindBeatBoxer(input) {
-    console.log(input);
-
     switch (input) {
         case beatboxer[0]:
             settings[3] = 0;
@@ -276,7 +266,7 @@ function FindBeatBoxer(input) {
             break;
 
         default: {
-            console.log(input + " is not  valid beatboxer");
+            // console.log(input + " is not  valid beatboxer");
         }
 
     }
@@ -288,6 +278,6 @@ function FindBeatBoxer(input) {
 }
 
 function PlayBeat() {
+    hasPlayedBeat = true;
     speak(pattern_data[settings[0]], tempo_data[settings[1]], hilo_data[settings[2]], beatboxer_data[settings[3]]);
-
 }
