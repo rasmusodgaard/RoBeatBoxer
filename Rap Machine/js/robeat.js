@@ -16,7 +16,6 @@ var startbutton = document.getElementById("startbutton");
 
 // controller interface for the speech synthesizer
 var synth = window.speechSynthesis;
-
 var progress = 0;
 var hasPlayedBeat = false;
 
@@ -83,11 +82,11 @@ function populateVoiceList() {
     });
 
     // Debug available voices
-    // console.log("Number of voices: " + voices.length);
-    // voices.forEach(element => {
-    //     console.log(element.name);
-    //     console.log(element.lang);
-    // });
+    console.log("Number of voices: " + voices.length);
+    voices.forEach(element => {
+        console.log(element.name);
+        console.log(element.lang);
+    });
 }
 
 populateVoiceList();
@@ -130,7 +129,7 @@ function speak(input, pitch, rate, voice) {
         utterThis.onend = function (event) {
             console.log("SpeechSynthesisUtterance.onend");
             if (hasPlayedBeat == true) {
-                window.location.reload();
+                document.location.reload();
             } else {
                 ShowUserOptions(choices[progress]);
             }
@@ -151,6 +150,7 @@ function speak(input, pitch, rate, voice) {
         utterThis.rate = rate;
         synth.speak(utterThis);
         dropdown.style.visibility = "hidden";
+        console.log(synth.speaking);
     }
 }
 
@@ -279,5 +279,6 @@ function FindBeatBoxer(input) {
 
 function PlayBeat() {
     hasPlayedBeat = true;
+    console.log("Play beat: " + hasPlayedBeat);
     speak(pattern_data[settings[0]], tempo_data[settings[1]], hilo_data[settings[2]], beatboxer_data[settings[3]]);
 }
